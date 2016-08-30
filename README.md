@@ -4,6 +4,7 @@
 
 * Cocos2d-x Plugin version 1.0.0
 * iOS SDK Version 1.1.6
+* 動作確認済みCocos2d-x Verison 3.10
 
 ## Download
 https://github.com/imobile-maio/maio-Cocos2d-x-Plugin/releases
