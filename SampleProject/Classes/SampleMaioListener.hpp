@@ -16,12 +16,12 @@ class SampleMaioListener : public maio::MaioListener {
 private:
     // イベントが起きた際に呼び出されるメソッドを宣言します。使用しないメソッドは宣言する必要はありません。
     void onInitialized();
-    void onChangedCanShow(const std::string &zoneId, const bool newValue);
-    void onStartAd(const std::string &zoneId);
-    void onFinishedAd(const std::string &zoneId, const int playtime, const bool skipped, const std::string &rewardParam);
-    void onClickedAd(const std::string &zoneId);
-    void onClosedAd(const std::string &zoneId);
-    void onFailed(const std::string &zoneId, const maio::FailReason reason);
+    void onChangedCanShow( const char *zoneId, const bool newValue );
+    void onStartAd( const char *zoneId );
+    void onFinishedAd( const char *zoneId, const int playtime, const bool skipped, const char *rewardParam );
+    void onClickedAd( const char *zoneId );
+    void onClosedAd( const char *zoneId );
+    void onFailed( const char *zoneId, const maio::FailReason reason );
 };
 
 #endif /* SampleMaioListener_hpp */
