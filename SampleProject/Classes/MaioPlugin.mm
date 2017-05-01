@@ -91,18 +91,6 @@
 
 @end
 
-
-// MaioListener methods
-maio::MaioListener::~MaioListener(){}
-void maio::MaioListener::onInitialized(){}
-void maio::MaioListener::onChangedCanShow( const char *zoneId, const bool newValue ){}
-void maio::MaioListener::onStartAd( const char *zoneId ){}
-void maio::MaioListener::onFinishedAd( const char *zoneId, const int playtime, const bool skipped, const char *rewardParam ){}
-void maio::MaioListener::onClickedAd( const char *zoneId ){}
-void maio::MaioListener::onClosedAd( const char *zoneId ){}
-void maio::MaioListener::onFailed( const char *zoneId, const FailReason reason ){}
-
-
 // MaioPlugin methods
 void maio::MaioPlugin::start( const char *mediaId, maio::MaioListener *listener ) {
     [MaioDelegateBridge sharedInstance].listener = listener;
