@@ -29,37 +29,37 @@
     return _sharedInstance;
 }
 - (void) maioDidInitialize {
-    if([self isListenerExist]) {
+    if(self.listener) {
         self.listener->onInitialized();
     }
 }
 - (void) maioDidChangeCanShow:(NSString *)zoneId newValue:(BOOL)newValue {
-    if([self isListenerExist]){
+    if(self.listener){
         self.listener->onChangedCanShow([zoneId UTF8String], (bool) newValue);
     }
 }
 - (void) maioWillStartAd:(NSString *)zoneId {
-    if([self isListenerExist]){
+    if(self.listener){
         self.listener->onStartAd([zoneId UTF8String]);
     }
 }
 - (void) maioDidFinishAd:(NSString *)zoneId playtime:(NSInteger)playtime skipped:(BOOL)skipped rewardParam:(NSString *)rewardParam {
-    if([self isListenerExist]){
+    if(self.listener){
         self.listener->onFinishedAd([zoneId UTF8String], (int) playtime, (bool) skipped, [rewardParam UTF8String]);
     }
 }
 - (void) maioDidClickAd:(NSString *)zoneId {
-    if([self isListenerExist]){
+    if(self.listener){
         self.listener->onClickedAd([zoneId UTF8String]);
     }
 }
 - (void) maioDidCloseAd:(NSString *)zoneId {
-    if([self isListenerExist]){
+    if(self.listener){
         self.listener->onClosedAd([zoneId UTF8String]);
     }
 }
 - (void) maioDidFail:(NSString *)zoneId reason:(MaioFailReason)reason {
-    if([self isListenerExist]){
+    if(self.listener){
         self.listener->onFailed([zoneId UTF8String], [self toFailReason: reason]);
     }
 }
@@ -83,10 +83,6 @@
         case MaioFailReasonVideoPlayback:
             return maio::FailReason::VideoPlayback;
     }
-}
-
-- (BOOL) isListenerExist {
-    return (BOOL) (self.listener != NULL);
 }
 
 @end
