@@ -25,6 +25,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--MaioSDKアクティビティの設定追加 ここから-->
+        <activity
+            android:name="jp.maio.sdk.android.AdFullscreenActivity"
+            android:label="maiosdk"
+            android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <data android:scheme="jp.maio.sdk.android"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <!-- ここまで -->
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>
