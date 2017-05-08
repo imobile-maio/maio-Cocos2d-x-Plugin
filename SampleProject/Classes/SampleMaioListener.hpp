@@ -22,6 +22,7 @@ private:
     void onClickedAd( const char *zoneId );
     void onClosedAd( const char *zoneId );
     void onFailed( const char *zoneId, const maio::FailReason reason );
+    ~SampleMaioListener(){};
 };
 
 #endif /* SampleMaioListener_hpp */

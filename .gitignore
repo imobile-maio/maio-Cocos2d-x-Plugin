@@ -25,3 +25,8 @@ Podfile.lock
 !.gitkeep
 .DS_Store
 .idea
+
+# cocos
+*/proj.android/obj
+*/proj.android/libs
+local.properties

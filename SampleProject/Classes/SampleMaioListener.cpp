@@ -39,7 +39,7 @@ void SampleMaioListener::onClosedAd( const char *zoneId ){
     // エンドカードが閉じられた際の処理
     cout <<"エンドカードが閉じられました" << endl;
 };
-void SampleMaioListener::onFailed( const char *zoneId, const FailReason reason ){
+void SampleMaioListener::onFailed( const char *zoneId, const maio::FailReason reason ){
     // エラーが発生した際の処理
     cout << "エラーが発生しました FailReason: " << (int)reason << endl;
 };
