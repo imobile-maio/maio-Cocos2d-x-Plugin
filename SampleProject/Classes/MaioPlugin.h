@@ -30,14 +30,14 @@ namespace maio {
     
     class MaioListener {
     public:
-        virtual ~MaioListener() {}
-        virtual void onInitialized() {}
-        virtual void onChangedCanShow( const char *zoneId, const bool newValue ) {}
-        virtual void onStartAd( const char *zoneId ) {}
-        virtual void onFinishedAd( const char *zoneId, const int playtime, const bool skipped, const char *rewardParam ) {}
-        virtual void onClickedAd( const char *zoneId ) {}
-        virtual void onClosedAd( const char *zoneId ) {}
-        virtual void onFailed( const char *zoneId, const FailReason reason ) {}
+        virtual ~MaioListener() {};
+        virtual void onInitialized() {};
+        virtual void onChangedCanShow( const char *zoneId, const bool newValue ) {};
+        virtual void onStartAd( const char *zoneId ) {};
+        virtual void onFinishedAd( const char *zoneId, const int playtime, const bool skipped, const char *rewardParam ) {};
+        virtual void onClickedAd( const char *zoneId ) {};
+        virtual void onClosedAd( const char *zoneId ) {};
+        virtual void onFailed( const char *zoneId, const FailReason reason ) {};
     };
     
     class MaioPlugin {
