@@ -74,6 +74,7 @@ proj.android-studio/app/obj/
 proj.android-studio/app/libs/armeabi/
 #proj.android-studio/app/gradle.properties
 proj.android-studio/app/local.properties
+proj.android-studio/app/build.xml
 proj.android-studio/*/build/
 cocos2d/cocos/platform/android/libcocos2dx/build/
 
