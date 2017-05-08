@@ -42,7 +42,7 @@ namespace maio {
     
     class MaioPlugin {
     public:
-        static std::string getSdkVersion();
+        static char const* getSdkVersion();
         static void setAdTestMode(bool adTestMode);
         static void start( const char *mediaId, MaioListener *listener );
         static bool canShow();

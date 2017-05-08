@@ -114,7 +114,7 @@ void maio::MaioPlugin::setAdTestMode(bool setAdTestMode){
     [Maio setAdTestMode: (BOOL) setAdTestMode];
 }
 
-std::string maio::MaioPlugin::getSdkVersion(){
+char const* maio::MaioPlugin::getSdkVersion(){
     return [[Maio sdkVersion] UTF8String];
 }
 
