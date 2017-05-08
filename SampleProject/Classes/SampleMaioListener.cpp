@@ -15,31 +15,33 @@ using maio::FailReason;
 using std::cout;
 using std::endl;
 
+USING_NS_CC;
+
 void SampleMaioListener::onInitialized(){
     // 広告表示準備完了時の処理
-    cout << "初期化が完了しました" << endl;
+    log("初期化が完了しました");
 };
 void SampleMaioListener::onChangedCanShow( const char *zoneId, const bool newValue ) {
     // 広告の配信可能状態が変更された際の処理
-    cout << "配信可能状態が変更されました" << endl;
+    log("配信可能状態が変更されました");
 };
 void SampleMaioListener::onStartAd( const char *zoneId ) {
     // 広告が再生開始された際の処理
-    cout << "再生開始しました" << endl;
+    log("再生開始しました");
 };
 void SampleMaioListener::onFinishedAd( const char *zoneId, const int playtime, const bool skipped, const char *rewardParam ){
     // 広告の再生が完了した際の処理
-    cout << "再生終了しました Playtime: " << playtime << "sec Skipped: " << skipped << endl;
+    log("再生終了しました Playtime: %dsec Skipped:%d ", playtime, skipped);
 };
 void SampleMaioListener::onClickedAd( const char *zoneId ){
     // 広告がクリックされた際の処理
-    cout << "ストア遷移しました" << endl;
+    log("ストア遷移しました");
 };
 void SampleMaioListener::onClosedAd( const char *zoneId ){
     // エンドカードが閉じられた際の処理
-    cout <<"エンドカードが閉じられました" << endl;
+    log("エンドカードが閉じられました");
 };
 void SampleMaioListener::onFailed( const char *zoneId, const maio::FailReason reason ){
     // エラーが発生した際の処理
-    cout << "エラーが発生しました FailReason: " << (int)reason << endl;
+    log("エラーが発生しました FailReason: %d", (int)reason);
 };
