@@ -82,6 +82,8 @@
             return maio::FailReason::DownloadCancelled;
         case MaioFailReasonVideoPlayback:
             return maio::FailReason::VideoPlayback;
+        default:
+            return maio::FailReason::Unknown;
     }
 }
 
