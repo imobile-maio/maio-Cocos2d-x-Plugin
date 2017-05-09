@@ -43,7 +43,8 @@ static int register_all_packages()
 
 bool AppDelegate::applicationDidFinishLaunching() {
     // Maio SDK Version
-    std::cout << "Maio SDK Version: " << MaioPlugin::getSdkVersion() << std::endl;
+    log("Maio SDK Version: %s", MaioPlugin::getSdkVersion());
+    
     // AdTestModeを設定（ストアに提出する際はコメントアウトしてください）
     MaioPlugin::setAdTestMode(true);
     //MaioListenerのインスタンスを作成
