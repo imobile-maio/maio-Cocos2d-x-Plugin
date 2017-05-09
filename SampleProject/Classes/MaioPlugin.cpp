@@ -6,11 +6,15 @@
 //
 //
 
+#include "cocos2d.h"
+
 #include "MaioPlugin.h"
 #include "jni.h"
 #include "platform/android/jni/JniHelper.h"
 
 #define MAIO_CLASS "jp/maio/sdk/plugin/cocos/android/MaioPlugin"
+
+USING_NS_CC;
 
 static maio::MaioListener *_listener;
 
@@ -26,50 +30,50 @@ extern "C" {
 
 // callback from Java
 JNIEXPORT void Java_jp_maio_sdk_plugin_cocos_android_MaioPlugin_onInitialized(JNIEnv *env, jobject thiz) {
-    if(_listener != nullptr) {
+    if(_listener) {
         _listener->onInitialized();
     }
 }
 
 JNIEXPORT void Java_jp_maio_sdk_plugin_cocos_android_MaioPlugin_onChangedCanShow(JNIEnv *env, jobject thiz, jstring jzoneId, jboolean newValue){
-    if(_listener != nullptr) {
-        std::string zoneId = cocos2d::JniHelper::jstring2string(jzoneId); // jstringをstd::stringに変換
-        _listener->onChangedCanShow(zoneId.c_str(), (bool)newValue);
+    if(_listener) {
+        const char* zoneId = env->GetStringUTFChars(jzoneId, 0);
+        _listener->onChangedCanShow(zoneId, (bool)newValue);
     }
 }
 
 JNIEXPORT void Java_jp_maio_sdk_plugin_cocos_android_MaioPlugin_onStartAd(JNIEnv *env, jobject thiz, jstring jzoneId) {
-    if(_listener != nullptr) {
-        std::string zoneId = cocos2d::JniHelper::jstring2string(jzoneId); // jstringをstd::stringに変換
-        _listener->onStartAd(zoneId.c_str());
+    if(_listener) {
+        const char* zoneId = env->GetStringUTFChars(jzoneId, 0);
+        _listener->onStartAd(zoneId);
     }
 }
 
 JNIEXPORT void Java_jp_maio_sdk_plugin_cocos_android_MaioPlugin_onFinishedAd(JNIEnv *env, jobject thiz, jstring jzoneId, jint jplaytime, jboolean jskipped, jstring jrewardParam) {
-    if(_listener != nullptr) {
-        std::string zoneId = cocos2d::JniHelper::jstring2string(jzoneId); // jstringをstd::stringに変換
-        std::string rewardParam = cocos2d::JniHelper::jstring2string(jrewardParam); // jstringをstd::stringに変換
-        _listener->onFinishedAd(zoneId.c_str(), (int) jplaytime, (bool)jskipped, rewardParam.c_str());
+    if(_listener) {
+        const char* zoneId = env->GetStringUTFChars(jzoneId, 0);
+        const char* rewardParam = env->GetStringUTFChars(jrewardParam, 0);
+        _listener->onFinishedAd(zoneId, (int) jplaytime, (bool)jskipped, rewardParam);
     }
 }
 
 JNIEXPORT void Java_jp_maio_sdk_plugin_cocos_android_MaioPlugin_onClickedAd(JNIEnv *env, jobject thiz, jstring jzoneId) {
-    if(_listener != nullptr) {
-        std::string zoneId = cocos2d::JniHelper::jstring2string(jzoneId); // jstringをstd::stringに変換
-        _listener->onClickedAd(zoneId.c_str());
+    if(_listener) {
+        const char* zoneId = env->GetStringUTFChars(jzoneId, 0);
+        _listener->onClickedAd(zoneId);
     }
 }
 
 JNIEXPORT void Java_jp_maio_sdk_plugin_cocos_android_MaioPlugin_onClosedAd(JNIEnv *env, jobject thiz, jstring jzoneId) {
-    if(_listener != nullptr) {
-        std::string zoneId = cocos2d::JniHelper::jstring2string(jzoneId); // jstringをstd::stringに変換
-        _listener->onClosedAd(zoneId.c_str());
+    if(_listener) {
+        const char* zoneId = env->GetStringUTFChars(jzoneId, 0);
+        _listener->onClosedAd(zoneId);
     }
 }
 
 JNIEXPORT void Java_jp_maio_sdk_plugin_cocos_android_MaioPlugin_onFailed(JNIEnv *env, jobject thiz, jstring jzoneId, jint jfailReason) {
-    if(_listener != nullptr) {
-        std::string zoneId = cocos2d::JniHelper::jstring2string(jzoneId); // jstringをstd::stringに変換
+    if(_listener) {
+        const char* zoneId = env->GetStringUTFChars(jzoneId, 0);
         maio::FailReason failReason;
         switch ((int)jfailReason) {
             case 1: failReason = maio::FailReason::AdStockOut; break;
@@ -83,25 +87,14 @@ JNIEXPORT void Java_jp_maio_sdk_plugin_cocos_android_MaioPlugin_onFailed(JNIEnv 
                 failReason = maio::FailReason::Unknown; break;
         }
 
-        _listener->onFailed(zoneId.c_str(), failReason);
+        _listener->onFailed(zoneId, failReason);
     }
 }
 
-
 // MaioPlugin methods
 void maio::MaioPlugin::start( const char *mediaId, maio::MaioListener *listener ) {
+    _listener = listener;
 
-    if(_listener != nullptr) {
-        delete _listener;
-        // &_listener = 0;
-    }
-
-    if(listener == nullptr) {
-        _listener = new maio::MaioListener();
-    } else {
-        _listener = listener;
-    }
-    
     cocos2d::JniMethodInfo methodInfo;
     if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, MAIO_CLASS, "start", "(Ljava/lang/String;)V")) 
     {
@@ -122,11 +115,9 @@ bool maio::MaioPlugin::canShow() {
     if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, MAIO_CLASS, "canShow", "()Z")) 
     {
         jboolean jResult = methodInfo.env->CallStaticBooleanMethod(methodInfo.classID, methodInfo.methodID);
+        
         result = (bool)jResult;
 
-        // TODO: これなくていいのか確認。booleanはプリミティブだから解放しなくていいかもしれんが
-        // MEMO: 実際はCppからJavaに戻ったときに解放されるらしいが、ローカルに持ちすぎるとVMを使い切ってしまう恐れがあるらしい。
-        // methodInfo.env->DeleteLocalRef(jResult);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
 
@@ -183,34 +174,24 @@ void maio::MaioPlugin::setAdTestMode(bool setAdTestMode){
 }
 
 char const* maio::MaioPlugin::getSdkVersion(){
-    std::string sdkVersion;
+    const char* sdkVersion;
 
     cocos2d::JniMethodInfo methodInfo;
     if (cocos2d::JniHelper::getStaticMethodInfo(methodInfo, MAIO_CLASS, "getSdkVersion", "()Ljava/lang/String;")) 
     {
         jobject result = methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
-        sdkVersion = cocos2d::JniHelper::jstring2string((jstring)result); // jstringをstd::stringに変換
+        sdkVersion = methodInfo.env->GetStringUTFChars((jstring)result, 0);
         methodInfo.env->DeleteLocalRef(result);
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
-    // TODO: 本当は以下のようにダイレクトでconst char*を取ってこれたらいいなあ。(下記は動かない)
-        // jobject objResult = methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID);
-        // sdkVersion = methodInfo.env->GetStringUTFChars(methodInfo.env, (jstring)objResult, 0);
-        // methodInfo.env->DeleteLocalRef(objResult);
-        // methodInfo.env->DeleteLocalRef(methodInfo.classID);
 
-    return sdkVersion.c_str();
+    return sdkVersion;
 }
 
 void maio::MaioPlugin::setListener(maio::MaioListener *listener){
-    if(_listener != nullptr) {
-        delete _listener;
-        // &_listener = 0;
-    }
     _listener = listener;
 }
 
 void maio::MaioPlugin::removeListener() {
-    delete _listener;
-    // &_listener = 0;
+    _listener = NULL;
 }
