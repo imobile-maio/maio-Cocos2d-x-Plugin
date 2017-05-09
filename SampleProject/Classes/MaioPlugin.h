@@ -26,6 +26,8 @@ namespace maio {
         DownloadCancelled,
         /// 動画再生エラー
         VideoPlayback,
+        /// レスポンスの内容に異常
+        Response
     };
     
     class MaioListener {

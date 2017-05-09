@@ -67,15 +67,15 @@ JNIEXPORT void Java_jp_maio_sdk_plugin_cocos_android_MaioPlugin_onClosedAd(JNIEn
     }
 }
 
-JNIEXPORT void Java_jp_maio_sdk_plugin_cocos_android_MaioPlugin_onFailed(JNIEnv *env, jobject thiz, jstring jzoneId, jint failReason) {
+JNIEXPORT void Java_jp_maio_sdk_plugin_cocos_android_MaioPlugin_onFailed(JNIEnv *env, jobject thiz, jstring jzoneId, jint jfailReason) {
     if(_listener != nullptr) {
         std::string zoneId = cocos2d::JniHelper::jstring2string(jzoneId); // jstringをstd::stringに変換
         maio::FailReason failReason;
-        switch ((int)failReason) {
+        switch ((int)jfailReason) {
             case 1: failReason = maio::FailReason::AdStockOut; break;
-            case 2: failReason = maio::FailReason::NetworkServer; break;
-            case 3: failReason = maio::FailReason::NetworkClient; break;
-            case 4: failReason = maio::FailReason::NetworkConnection; break;
+            case 2: failReason = maio::FailReason::Response; break;
+            case 3: failReason = maio::FailReason::NetworkConnection; break;
+            case 4: failReason = maio::FailReason::NetworkServer; break;
             case 5: failReason = maio::FailReason::VideoPlayback; break;
             
             case 0: 
