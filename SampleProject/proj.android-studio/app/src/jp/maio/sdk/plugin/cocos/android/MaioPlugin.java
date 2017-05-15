@@ -28,11 +28,13 @@ public class MaioPlugin
             @Override
             //変更時の処理
             public void onChangedCanShow(String zoneId, boolean newValue) {
+                if(zoneId == null) zoneId = "";
                 MaioPlugin.onChangedCanShow(zoneId, newValue);
             }
             @Override
             //再生直前に呼ばれる処理
             public void onOpenAd(String zoneId) {
+                if(zoneId == null) zoneId = "";
                 MaioPlugin.onStartAd(zoneId);
             }
             @Override
@@ -43,22 +45,27 @@ public class MaioPlugin
             @Override
             //再生終了時に呼ばれる処理
             public void onFinishedAd(int playtime, boolean skipped, int duration, String zoneId) {
+                if(zoneId == null) zoneId = "";
                 // TODO: androidではrewardParamを実装していないので、実装されたら以下の 0 を修正する
                 MaioPlugin.onFinishedAd(zoneId, playtime, skipped, "0");
             }
             @Override
             //広告クリック時に呼ばれる処理
             public void onClickedAd(String zoneId) {
+                if(zoneId == null) zoneId = "";
                 MaioPlugin.onClickedAd(zoneId);
             }
             @Override
             //広告が閉じられた際の処理
             public void onClosedAd(String zoneId) {
+                if(zoneId == null) zoneId = "";
                 MaioPlugin.onClosedAd(zoneId);
             }
             @Override
             //エラー時に呼ばれる処理
             public void onFailed(FailNotificationReason reason, String zoneId) {
+                if(zoneId == null) zoneId = "";
+                
                 int failReason;
                 switch (reason)
                 {
