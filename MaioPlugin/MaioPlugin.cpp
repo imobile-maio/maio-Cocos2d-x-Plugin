@@ -1,6 +1,5 @@
 //
 //  MaioPlugin.cpp
-//  Sample
 //
 //  Created by maio on 2017/05/01.
 //

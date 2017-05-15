@@ -13,7 +13,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2B66DF0B1EC1C29B003E2111 /* Maio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B66DF0A1EC1C29B003E2111 /* Maio.framework */; };
-		2B66DF0D1EC1C2DE003E2111 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B66DF0C1EC1C2DE003E2111 /* StoreKit.framework */; };
+		2B7B20AE1EC93AF300CE322D /* MaioPluginHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7B20AD1EC93AF300CE322D /* MaioPluginHelper.m */; };
 		3EACC98F19EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		3EACC99019EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		46880B7B19C43A67006E1F66 /* CloseNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = 46880B7619C43A67006E1F66 /* CloseNormal.png */; };
@@ -72,10 +72,6 @@
 		ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7B1B68A1F400C3958E /* libiconv.dylib */; };
 		ED545A7E1B68A1FA00C3958E /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ED545A7D1B68A1FA00C3958E /* libiconv.dylib */; };
 		FA37D5AA1D73F44700C189DA /* MaioPlugin.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA37D5A91D73F44700C189DA /* MaioPlugin.mm */; };
-		FA37D5AC1D73F45B00C189DA /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA37D5AB1D73F45B00C189DA /* AdSupport.framework */; };
-		FA37D5AE1D73F46700C189DA /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA37D5AD1D73F46700C189DA /* MobileCoreServices.framework */; };
-		FA37D5B01D73F47100C189DA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA37D5AF1D73F47100C189DA /* CoreMedia.framework */; };
-		FA37D5B21D73F47A00C189DA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA37D5B11D73F47A00C189DA /* SystemConfiguration.framework */; };
 		FA37D5B51D73F48E00C189DA /* SampleMaioListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA37D5B31D73F48E00C189DA /* SampleMaioListener.cpp */; };
 /* End PBXBuildFile section */
 
@@ -117,9 +113,9 @@
 		1D6058910D05DD3D006BFB54 /* Sample-mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sample-mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2B66DF061EC05661003E2111 /* MaioPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MaioPlugin.cpp; sourceTree = "<group>"; };
 		2B66DF0A1EC1C29B003E2111 /* Maio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Maio.framework; sourceTree = "<group>"; };
 		2B66DF0C1EC1C2DE003E2111 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
+		2B7B20AD1EC93AF300CE322D /* MaioPluginHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaioPluginHelper.m; sourceTree = "<group>"; };
 		3EACC98E19EE6D4300EB3C5E /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		46880B7619C43A67006E1F66 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
 		46880B7719C43A67006E1F66 /* CloseSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseSelected.png; sourceTree = "<group>"; };
@@ -189,11 +185,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B66DF0D1EC1C2DE003E2111 /* StoreKit.framework in Frameworks */,
-				FA37D5B21D73F47A00C189DA /* SystemConfiguration.framework in Frameworks */,
-				FA37D5B01D73F47100C189DA /* CoreMedia.framework in Frameworks */,
-				FA37D5AE1D73F46700C189DA /* MobileCoreServices.framework in Frameworks */,
-				FA37D5AC1D73F45B00C189DA /* AdSupport.framework in Frameworks */,
 				ED545A7C1B68A1F400C3958E /* libiconv.dylib in Frameworks */,
 				52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */,
 				1AC6FB30180E99EB004C840B /* libcocos2d iOS.a in Frameworks */,
@@ -328,7 +319,6 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				2B66DF061EC05661003E2111 /* MaioPlugin.cpp */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
@@ -337,6 +327,7 @@
 				FA37D5A91D73F44700C189DA /* MaioPlugin.mm */,
 				FA37D5B41D73F48E00C189DA /* SampleMaioListener.hpp */,
 				FA37D5B31D73F48E00C189DA /* SampleMaioListener.cpp */,
+				2B7B20AD1EC93AF300CE322D /* MaioPluginHelper.m */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -537,6 +528,7 @@
 			files = (
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
+				2B7B20AE1EC93AF300CE322D /* MaioPluginHelper.m in Sources */,
 				FA37D5AA1D73F44700C189DA /* MaioPlugin.mm in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				FA37D5B51D73F48E00C189DA /* SampleMaioListener.cpp in Sources */,
@@ -575,6 +567,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = V4NXQHLYQP;
@@ -618,6 +611,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				DEVELOPMENT_TEAM = V4NXQHLYQP;
