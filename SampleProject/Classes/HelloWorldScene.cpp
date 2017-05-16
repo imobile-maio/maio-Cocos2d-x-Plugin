@@ -1,12 +1,9 @@
 #include "HelloWorldScene.h"
 #include "MaioPlugin.h"
-#include <stdio.h>
-#include <iostream>
 
 using maio::MaioPlugin;
 using maio::MaioListener;
 using maio::FailReason;
-
 
 USING_NS_CC;
 
@@ -68,8 +65,6 @@ bool HelloWorld::init()
     playButtonMenu->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
     
     this->addChild(playButtonMenu, 0);
-
-    std::cout << maio::MaioPlugin::getSdkVersion() << std::endl;
     
     return true;
 }
