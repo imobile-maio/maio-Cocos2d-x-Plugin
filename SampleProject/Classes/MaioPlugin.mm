@@ -35,32 +35,39 @@
 }
 - (void) maioDidChangeCanShow:(NSString *)zoneId newValue:(BOOL)newValue {
     if(self.listener){
-        self.listener->onChangedCanShow([zoneId UTF8String], (bool) newValue);
+        NSString *_zoneId = zoneId ?: @"";
+        self.listener->onChangedCanShow([_zoneId UTF8String], (bool) newValue);
     }
 }
 - (void) maioWillStartAd:(NSString *)zoneId {
     if(self.listener){
-        self.listener->onStartAd([zoneId UTF8String]);
+        NSString *_zoneId = zoneId ?: @"";
+        self.listener->onStartAd([_zoneId UTF8String]);
     }
 }
 - (void) maioDidFinishAd:(NSString *)zoneId playtime:(NSInteger)playtime skipped:(BOOL)skipped rewardParam:(NSString *)rewardParam {
     if(self.listener){
-        self.listener->onFinishedAd([zoneId UTF8String], (int) playtime, (bool) skipped, [rewardParam UTF8String]);
+        NSString *_zoneId = zoneId ?: @"";
+        NSString *_rewardParam = rewardParam ?: @"";
+        self.listener->onFinishedAd([_zoneId UTF8String], (int) playtime, (bool) skipped, [_rewardParam UTF8String]);
     }
 }
 - (void) maioDidClickAd:(NSString *)zoneId {
     if(self.listener){
-        self.listener->onClickedAd([zoneId UTF8String]);
+        NSString *_zoneId = zoneId ?: @"";
+        self.listener->onClickedAd([_zoneId UTF8String]);
     }
 }
 - (void) maioDidCloseAd:(NSString *)zoneId {
     if(self.listener){
-        self.listener->onClosedAd([zoneId UTF8String]);
+        NSString *_zoneId = zoneId ?: @"";
+        self.listener->onClosedAd([_zoneId UTF8String]);
     }
 }
 - (void) maioDidFail:(NSString *)zoneId reason:(MaioFailReason)reason {
     if(self.listener){
-        self.listener->onFailed([zoneId UTF8String], [self toFailReason: reason]);
+        NSString *_zoneId = zoneId ?: @"";
+        self.listener->onFailed([_zoneId UTF8String], [self toFailReason: reason]);
     }
 }
 
