@@ -26,29 +26,31 @@ namespace maio {
         DownloadCancelled,
         /// 動画再生エラー
         VideoPlayback,
+        /// レスポンスの内容に異常
+        Response
     };
     
     class MaioListener {
     public:
-        virtual ~MaioListener();
-        virtual void onInitialized();
-        virtual void onChangedCanShow(const std::string &zoneId, const bool newValue);
-        virtual void onStartAd(const std::string &zoneId);
-        virtual void onFinishedAd(const std::string &zoneId, const int playtime, const bool skipped, const std::string &rewardParam);
-        virtual void onClickedAd(const std::string &zoneId);
-        virtual void onClosedAd(const std::string &zoneId);
-        virtual void onFailed(const std::string &zoneId, const FailReason reason);
+        virtual ~MaioListener() {};
+        virtual void onInitialized() {};
+        virtual void onChangedCanShow( const char *zoneId, const bool newValue ) {};
+        virtual void onStartAd( const char *zoneId ) {};
+        virtual void onFinishedAd( const char *zoneId, const int playtime, const bool skipped, const char *rewardParam ) {};
+        virtual void onClickedAd( const char *zoneId ) {};
+        virtual void onClosedAd( const char *zoneId ) {};
+        virtual void onFailed( const char *zoneId, const FailReason reason ) {};
     };
     
     class MaioPlugin {
     public:
-        static std::string getSdkVersion();
+        static char const* getSdkVersion();
         static void setAdTestMode(bool adTestMode);
-        static void start(const std::string &mediaId, MaioListener *listener);
+        static void start( const char *mediaId, MaioListener *listener );
         static bool canShow();
-        static bool canShow(const std::string &zoneId);
+        static bool canShow( const char *zoneId );
         static void show();
-        static void show(const std::string &zoneId);
+        static void show( const char *zoneId );
         static void setListener(MaioListener *listener);
         static void removeListener();
     };

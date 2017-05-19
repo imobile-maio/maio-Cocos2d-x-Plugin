@@ -29,46 +29,45 @@
     return _sharedInstance;
 }
 - (void) maioDidInitialize {
-    if([self isListenerExist]) {
+    if(self.listener) {
         self.listener->onInitialized();
     }
 }
 - (void) maioDidChangeCanShow:(NSString *)zoneId newValue:(BOOL)newValue {
-    if([self isListenerExist]){
-        self.listener->onChangedCanShow([zoneId UTF8String], (bool) newValue);
+    if(self.listener){
+        NSString *_zoneId = zoneId ?: @"";
+        self.listener->onChangedCanShow([_zoneId UTF8String], (bool) newValue);
     }
 }
 - (void) maioWillStartAd:(NSString *)zoneId {
-    if([self isListenerExist]){
-        self.listener->onStartAd([zoneId UTF8String]);
+    if(self.listener){
+        NSString *_zoneId = zoneId ?: @"";
+        self.listener->onStartAd([_zoneId UTF8String]);
     }
 }
 - (void) maioDidFinishAd:(NSString *)zoneId playtime:(NSInteger)playtime skipped:(BOOL)skipped rewardParam:(NSString *)rewardParam {
-    if([self isListenerExist]){
-        std::string _rewardParam = std::string();
-        if(rewardParam){
-            _rewardParam = [rewardParam UTF8String];
-        }
-        self.listener->onFinishedAd([zoneId UTF8String], (int) playtime, (bool) skipped, _rewardParam);
+    if(self.listener){
+        NSString *_zoneId = zoneId ?: @"";
+        NSString *_rewardParam = rewardParam ?: @"";
+        self.listener->onFinishedAd([_zoneId UTF8String], (int) playtime, (bool) skipped, [_rewardParam UTF8String]);
     }
 }
 - (void) maioDidClickAd:(NSString *)zoneId {
-    if([self isListenerExist]){
-        self.listener->onClickedAd([zoneId UTF8String]);
+    if(self.listener){
+        NSString *_zoneId = zoneId ?: @"";
+        self.listener->onClickedAd([_zoneId UTF8String]);
     }
 }
 - (void) maioDidCloseAd:(NSString *)zoneId {
-    if([self isListenerExist]){
-        self.listener->onClosedAd([zoneId UTF8String]);
+    if(self.listener){
+        NSString *_zoneId = zoneId ?: @"";
+        self.listener->onClosedAd([_zoneId UTF8String]);
     }
 }
 - (void) maioDidFail:(NSString *)zoneId reason:(MaioFailReason)reason {
-    if([self isListenerExist]){
-        std::string _zoneId = std::string();
-        if(zoneId){
-            _zoneId = std::string([zoneId UTF8String]);
-        }
-        self.listener->onFailed(_zoneId, [self toFailReason: reason]);
+    if(self.listener){
+        NSString *_zoneId = zoneId ?: @"";
+        self.listener->onFailed([_zoneId UTF8String], [self toFailReason: reason]);
     }
 }
 
@@ -90,54 +89,41 @@
             return maio::FailReason::DownloadCancelled;
         case MaioFailReasonVideoPlayback:
             return maio::FailReason::VideoPlayback;
+        default:
+            return maio::FailReason::Unknown;
     }
-}
-
-- (BOOL) isListenerExist {
-    return (BOOL) (self.listener != NULL);
 }
 
 @end
 
-
-// MaioListener methods
-maio::MaioListener::~MaioListener(){}
-void maio::MaioListener::onInitialized(){}
-void maio::MaioListener::onChangedCanShow(const std::string &zoneId, const bool newValue){}
-void maio::MaioListener::onStartAd(const std::string &zoneId){}
-void maio::MaioListener::onFinishedAd(const std::string &zoneId, const int playtime, const bool skipped, const std::string &rewardParam){}
-void maio::MaioListener::onClickedAd(const std::string &zoneId){}
-void maio::MaioListener::onClosedAd(const std::string &zoneId){}
-void maio::MaioListener::onFailed(const std::string &zoneId, const FailReason reason){}
-
-
 // MaioPlugin methods
-void maio::MaioPlugin::start(const std::string &mediaId, maio::MaioListener *listener) {
+void maio::MaioPlugin::start( const char *mediaId, maio::MaioListener *listener ) {
     [MaioDelegateBridge sharedInstance].listener = listener;
-    [Maio startWithMediaId: [NSString stringWithUTF8String: mediaId.c_str()] delegate: (id<MaioDelegate>)[MaioDelegateBridge sharedInstance]];
+    [Maio startWithMediaId:[NSString stringWithUTF8String: mediaId]
+                  delegate:(id<MaioDelegate>)[MaioDelegateBridge sharedInstance]];
 }
 
 bool maio::MaioPlugin::canShow() {
     return [Maio canShow];
 }
 
-bool maio::MaioPlugin::canShow(const std::string &zoneId) {
-    return [Maio canShowAtZoneId:[NSString stringWithUTF8String: zoneId.c_str()]];
+bool maio::MaioPlugin::canShow( const char *zoneId ) {
+    return [Maio canShowAtZoneId:[NSString stringWithUTF8String: zoneId]];
 }
 
 void maio::MaioPlugin::show() {
     [Maio show];
 }
 
-void maio::MaioPlugin::show(const std::string &zoneId) {
-    [Maio showAtZoneId:[NSString stringWithUTF8String: zoneId.c_str()]];
+void maio::MaioPlugin::show( const char *zoneId ) {
+    [Maio showAtZoneId:[NSString stringWithUTF8String: zoneId]];
 }
 
 void maio::MaioPlugin::setAdTestMode(bool setAdTestMode){
     [Maio setAdTestMode: (BOOL) setAdTestMode];
 }
 
-std::string maio::MaioPlugin::getSdkVersion(){
+char const* maio::MaioPlugin::getSdkVersion(){
     return [[Maio sdkVersion] UTF8String];
 }
 
