@@ -10,8 +10,8 @@
 https://github.com/imobile-maio/maio-Cocos2d-x-Plugin/releases
 
 ## Setup
-iOS    : [wiki/Setup-for-iOS](https://github.com/imobile-maio/maio-Cocos2d-x-Plugin/wiki/Setup-for-iOS)
-Android: [wiki/Setup-for-Android](https://github.com/imobile-maio/maio-Cocos2d-x-Plugin/wiki/Setup-for-Android)
+* [wiki/Setup-for-iOS](https://github.com/imobile-maio/maio-Cocos2d-x-Plugin/wiki/Setup-for-iOS)
+* [wiki/Setup-for-Android](https://github.com/imobile-maio/maio-Cocos2d-x-Plugin/wiki/Setup-for-Android)
 
 ## Get Started
 [wiki/Get-Started](https://github.com/imobile-maio/maio-Cocos2d-x-Plugin/wiki/Get-Started)
