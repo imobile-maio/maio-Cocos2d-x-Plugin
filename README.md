@@ -3,7 +3,9 @@
 # maio-Cocos2d-x-Plugin
 
 * Cocos2d-x Plugin version 1.0.0β
-* iOS SDK Version 1.1.6
+* サンプルとして同梱しているSDK
+    * iOS SDK Version 1.2.11
+    * Android SDK Versios 1.0.4
 * 動作確認済みCocos2d-x Verison 3.10
 
 ## Download
